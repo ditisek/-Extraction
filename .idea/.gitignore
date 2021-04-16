@@ -1,5 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/.idea
-data.*
+.idea/
+data.dat
+data.bak
+data.dir
