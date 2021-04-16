@@ -35,17 +35,13 @@ class MyFrame(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.export_data, self.button_2)
         # end wxGlade
 
-
-
     def get_headers(self, event):  # wxGlade: MyFrame.<event_handler>
         data = []
 
         extension = self.text_ctrl_1.GetValue()
-        # print(extension)
 
         path = MyFileDialog(None, wildcard=extension)
         files = path.EventHandler.Paths
-        # current_path = os.path.realpath(__file__).rsplit("\\", 1)[0]
 
         for file_no in range(0, len(files)):
 
@@ -68,27 +64,7 @@ class MyFrame(wx.Frame):
         data_out['files'] = files
         data_out.close()
 
-
-        # frame2 = SelectMessages(None, wx.ID_ANY, "")
-        # frame2.check_list_box_2.SetItems(headers)
-        # frame2.Show()
-
-        # path = MyNewFileDialog(None)
-        # output_file = path.EventHandler.Path
-        # print(output_file)
-        #
-
-        # with open(output_file, 'w') as out:
-        #     for line in data:
-        #         for header in headers_out:
-        #             if line.startswith(header):
-        #                 out.write(line)
-
-        print()
-
         event.Skip()
-        # headers_selected = frame2.check_list_box_2.GetCheckedStrings()
-        # print(headers_selected)
 
     def export_data(self, event):  # wxGlade: MyFrame.<event_handler>
         headers = self.check_list_box_1.GetCheckedStrings()
@@ -106,7 +82,6 @@ class MyFrame(wx.Frame):
 
         print(files)
 
-
         with open(output_file, 'w') as out:
             for file in files:
                 with open(file, 'r') as data_file:
@@ -115,28 +90,12 @@ class MyFrame(wx.Frame):
                             if line.startswith(header):
                                 # print(line)
                                 out.write(line)
-
-        # with open(output_file, 'w') as out:
-        #     for line in data:
-        #         for header in headers_out:
-        #             if line.startswith(header):
-        #                 out.write(line)
-
-
-
         print(headers)
         event.Skip()
 
     def SelectFrame(self, headers):
-        # f2 = wx.Frame(None, -1)
-        # self.check_list_box_2 = wx.CheckListBox(f2, wx.ID_ANY,
-        #                                         choices=select)
-        # c = wx.Choice(f2, -1, choices=['red', 'blue', 'green'])
-        # f2.Show()
         window3 = SelectMessages(None, wx.ID_ANY, "")
-        # return self.check_list_box_1.GetCheckedStrings()
 
-    # def showDialog(self, event): # wxGlade: MyMainFrame.<event_handler>
     def showDialog(self, headers): # wxGlade: MyMainFrame.<event_handler>
         # SelectMessages(self).Show()
         # newframe = SelectMessages()
@@ -149,6 +108,7 @@ class MyFrame(wx.Frame):
 
 # end of class MyFrame
 
+
 class MyApp(wx.App):
     def OnInit(self):
         self.frame = MyFrame(None, wx.ID_ANY, "")
@@ -158,10 +118,10 @@ class MyApp(wx.App):
 
 # end of class MyApp
 
+
 class MyFileDialog(wx.FileDialog):
     def __init__(self, *args, **kwds):
         # begin wxGlade: MyFileDialog.__init__
-        # kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_DIALOG_STYLE
         kwds["style"] = kwds.get("style", 0) | wx.FD_OPEN | \
                         wx.FD_FILE_MUST_EXIST | wx.FD_MULTIPLE
         wx.FileDialog.__init__(self, *args, **kwds)
@@ -170,18 +130,14 @@ class MyFileDialog(wx.FileDialog):
         self.ShowModal()
 # end of class MyFileDialog
 
+
 class SelectMessages(wx.Frame):
     def __init__(self, *args, **kwds):
     # def __init__(self, data, *args, **kwds):
-        # print(kwds)
         # begin wxGlade: SelectMessages.__init__
         kwds["style"] = kwds.get("style", 0) | wx.CAPTION | wx.CLIP_CHILDREN | \
                         wx.CLOSE_BOX | wx.RESIZE_BORDER | wx.SYSTEM_MENU
-        # kwds["choices"] = kwds.get("choices", 0)
-        # arg_tuple = (None, -1, '')
         wx.Frame.__init__(self, *args, **kwds)
-        # wx.Frame.__init__(self, *arg_tuple, **kwds)
-        # wx.Frame.__init__(self)
         self.SetSize((136, 449))
         self.SetTitle("frame_1")
 
@@ -189,8 +145,6 @@ class SelectMessages(wx.Frame):
 
         sizer_1 = wx.BoxSizer(wx.VERTICAL)
 
-        # self.check_list_box_2 = wx.CheckListBox(self.panel_1, wx.ID_ANY,
-        #                                         choices=['1','2','3'])
         self.check_list_box_2 = wx.CheckListBox(self.panel_1, wx.ID_ANY)
         self.check_list_box_2.SetMinSize((100, 400))
         sizer_1.Add(self.check_list_box_2, 0, wx.ALIGN_CENTER_HORIZONTAL, 0)
@@ -204,20 +158,14 @@ class SelectMessages(wx.Frame):
         # end wxGlade
 
     def write_file(self, event):  # wxGlade: SelectMessages.<event_handler>
-        # select = self.check_list_box_2.GetCheckedStrings()
-        # print(select)
-        # path = MyNewFileDialog(None)
-        # output_file = path.EventHandler.Path
         print("Not yet close window")
         event.Skip()
-        # return self.check_list_box_2.GetCheckedStrings()
 
 # end of class SelectMessages
 
+
 class MyNewFileDialog(wx.FileDialog):
     def __init__(self, *args, **kwds):
-        # begin wxGlade: MyFileDialog.__init__
-        # kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_DIALOG_STYLE
         kwds["style"] = kwds.get("style", 0) | wx.FD_SAVE
         kwds['defaultFile'] = 'data.csv'
         wx.FileDialog.__init__(self, *args, **kwds)
@@ -225,6 +173,7 @@ class MyNewFileDialog(wx.FileDialog):
 
         self.ShowModal()
 # end of class MyFileDialog
+
 
 if __name__ == "__main__":
     app = MyApp(0)
