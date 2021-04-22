@@ -1,10 +1,12 @@
 import wx
 import shelve
 
+
 class MyFrame(wx.Frame):
     def __init__(self, *args, **kwds):
         # begin wxGlade: MyFrame.__init__
-        kwds["style"] = kwds.get("style", 0) | wx.CAPTION | wx.CLIP_CHILDREN | wx.CLOSE_BOX | wx.RESIZE_BORDER | wx.SYSTEM_MENU
+        kwds["style"] = kwds.get("style", 0) | wx.CAPTION | wx.CLIP_CHILDREN \
+                        | wx.CLOSE_BOX | wx.RESIZE_BORDER | wx.SYSTEM_MENU
         wx.Frame.__init__(self, *args, **kwds)
         self.SetSize((170, 446))
         self.SetTitle("$MSG Tools")
@@ -47,7 +49,6 @@ class MyFrame(wx.Frame):
 
             try:
                 f = open(files[file_no], "r")
-                # print(file_list[file_no]) # Print file name
                 for line in f:
                     data.append(line)
             except:
@@ -69,9 +70,6 @@ class MyFrame(wx.Frame):
     def export_data(self, event):  # wxGlade: MyFrame.<event_handler>
         headers = self.check_list_box_1.GetCheckedStrings()
 
-        # self.showDialog(None)
-        # for header in headers:
-        #     print(header)
         path = MyNewFileDialog(None)
         output_file = path.EventHandler.Path
         print(output_file)
@@ -97,10 +95,6 @@ class MyFrame(wx.Frame):
         window3 = SelectMessages(None, wx.ID_ANY, "")
 
     def showDialog(self, headers): # wxGlade: MyMainFrame.<event_handler>
-        # SelectMessages(self).Show()
-        # newframe = SelectMessages()
-        # newframe.setChoices(headers)
-        # newframe.Show()
         headers = self.check_list_box_1.GetCheckedStrings()
         newframe = SelectMessages(self)
         newframe.check_list_box_2.SetItems(headers)
@@ -133,7 +127,6 @@ class MyFileDialog(wx.FileDialog):
 
 class SelectMessages(wx.Frame):
     def __init__(self, *args, **kwds):
-    # def __init__(self, data, *args, **kwds):
         # begin wxGlade: SelectMessages.__init__
         kwds["style"] = kwds.get("style", 0) | wx.CAPTION | wx.CLIP_CHILDREN | \
                         wx.CLOSE_BOX | wx.RESIZE_BORDER | wx.SYSTEM_MENU
