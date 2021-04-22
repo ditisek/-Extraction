@@ -88,6 +88,7 @@ class MainFrame(wx.Frame):
 
     def ReadHeaders(self, event):  # wxGlade: MainFrame.<event_handler>
         data = []
+        headers = []
 
         extension = self.text_ctrl_1.GetValue()
 
@@ -99,15 +100,13 @@ class MainFrame(wx.Frame):
                 f = open(files[file_no], "r")
                 print(f"Reading file: {files[file_no]}")
                 for line in f:
-                    data.append(line)
+                    headers.append(line.rsplit(',')[0])
                 self.check_list_box_1.SetSelection(file_no)
                 # self.check_list_box_1.SetCheckedItems(file_no)
             except:
                 print("error in file {0}".format(files[file_no]))
 
-        headers = dict.fromkeys([line.rsplit(",")[0] for line in data
-                                 if len(line.rsplit(',')) > 1])
-        headers = list(headers)
+        headers = list(set(headers))
 
         self.check_list_box_2.SetItems(headers)
 
