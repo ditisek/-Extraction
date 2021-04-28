@@ -100,14 +100,16 @@ class MainFrame(wx.Frame):
                 f = open(files[file_no], "r")
                 print(f"Reading file: {files[file_no]}")
                 for line in f:
-                    headers.append(line.rsplit(',')[0])
+                    headers.append(line.rsplit(',')[0].rstrip())
                 self.check_list_box_1.SetSelection(file_no)
                 # self.check_list_box_1.SetCheckedItems(file_no)
             except:
                 print("error in file {0}".format(files[file_no]))
 
         headers = list(set(headers))
-
+        # headers = [header.rstrip() for header in headers]
+        # headers = list(set(headers))
+        headers = sorted(headers)
         self.check_list_box_2.SetItems(headers)
 
         print("Done reading headers")
